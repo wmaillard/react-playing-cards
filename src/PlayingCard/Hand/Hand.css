@@ -5,3 +5,15 @@
 .Hand {
 	text-align: center
 }
+@media screen and (max-width: 699px) and (min-width: 520px) {
+	.Hand .Playing-card:hover{
+		transform:translateY(-70%)
+	}
+}
+
+
+@media screen and (max-width: 1000px) and (min-width: 700px){
+	.Hand .Playing-card:hover{
+		transform:translateY(-50%)
+	}
+}
