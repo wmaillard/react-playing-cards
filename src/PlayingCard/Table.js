@@ -31,6 +31,9 @@ class Hand extends Component {
             console.log('degs',degs);
             console.log('over', over);
             console.log('down', actualDown)
+            actualDown = 0;
+            degs = 0;
+            over = 0;
             return (
             <div style={{'transform': 'translateY(' + actualDown + '%) translateX(' + over + '%) rotate(' + degs + 'deg)' +
             ''}}>
@@ -61,11 +64,15 @@ class Table extends Component {
     //const inlineStyle = 
     return (
       <div>
+      {/*
       <Hand cards={this.state.cards1} cardSize={50}/>
       <Hand cards={this.state.cards2} cardSize={100}/>
+      */}
       <Hand cards={this.state.cards3} cardSize={110}/>
+      {/*
       <Hand cards={this.state.cards4} cardSize={250}/>
       <Hand cards={this.state.cards5} cardSize={500}/>
+      */}
 
       </div>
       
