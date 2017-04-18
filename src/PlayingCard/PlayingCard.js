@@ -15,8 +15,9 @@ class PlayingCard extends Component {
   }
   render() {
     return (
-      <div>
-        <img 
+
+        <img
+          style={this.props.style}
           height={this.state.height} 
           className='Playing-card' 
           src={this.state.flipped === 'true' ? PlayingCards.flipped : PlayingCards[this.state.card]} 
@@ -27,7 +28,7 @@ class PlayingCard extends Component {
               card: this.state.card});
           }}
         />
-      </div>
+
 
       
     );

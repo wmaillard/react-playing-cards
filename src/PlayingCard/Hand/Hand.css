@@ -1,10 +1,9 @@
 .Hand div {
 	position:absolute;
-	transform:translateX(-50%);
+
 }
 .Hand {
-	text-align: center;
-	transform:translateX(50%);
+
 }
 @media screen and (max-width: 699px) and (min-width: 520px) {
 	.Hand .Playing-card:hover{

@@ -31,14 +31,14 @@ class Hand extends Component {
             console.log('degs',degs);
             console.log('over', over);
             console.log('down', actualDown)
-            actualDown = 0;
-            degs = 0;
-            over = 0;
+
+
+            //translate percent is not working but px is, maybe calc percent from cardSize?
             return (
-            <div style={{'transform': 'translateY(' + actualDown + '%) translateX(' + over + '%) rotate(' + degs + 'deg)' +
-            ''}}>
-              <PlayingCard className='Player-card' height={this.props.cardSize} card={card} />
-              </div>
+
+              <PlayingCard className='Player-card' height={this.props.cardSize} card={card} style={{'transform': 'translateY(' + actualDown + '%) translateX(' + over + '%) rotate(' + degs + 'deg)' +
+            ''}} />
+
             )
             
           })
