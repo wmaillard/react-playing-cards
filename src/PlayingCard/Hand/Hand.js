@@ -1,11 +1,13 @@
 import React, { Component} from 'react';
 import './Hand.css';
 import PlayingCard from './PlayingCard/PlayingCard';
+import ReactDOM from 'react-dom';
 
 class Hand extends Component {
     constructor(props) {
             super(props);
-            console.assert(Array.isArray(this.props.cards), 'Hands must have cards, even as an empty array');  
+            console.assert(Array.isArray(this.props.cards), 'Hands must have cards, even as an empty array');
+            this.cardStyles = [];
             //setup for fanning
             if(this.props.fan){
               this.resetFanning();
@@ -33,6 +35,7 @@ class Hand extends Component {
         this.over = this.initialOver / 2;
     }
     componentWillUpdate(){
+        console.log('hey: ', this.cardStyles)
         if (this.props.fan) {
           this.resetFanning();
         }else if(this.props.spread){
@@ -50,7 +53,7 @@ class Hand extends Component {
     }
     fanStyle(num) {
         let overHalf = num > (this.props.cards.length - 1) / 2;
-        if (process.env.NODE_ENV !== "production") {
+        if (false && process.env.NODE_ENV !== "production") {
             console.log('degs', this.degs);
             console.log('over', this.over);
             console.log('down', (this.overHalf ? -this.down : this.down));
@@ -76,11 +79,12 @@ class Hand extends Component {
                   num++;
                   return (
                       <PlayingCard 
-                      key={ card }
-                      height={ this.props.cardSize }
-                      card={ card }
-                      style={this.styleType(num)}
-                      flipped={ this.props.hide }
+                          ref={(node)=>this.cardStyles.push(node ? ReactDOM.findDOMNode(node).getBoundingClientRect() : null)}
+                          key={ card }
+                          height={ this.props.cardSize }
+                          card={ card }
+                          style={this.styleType(num)}
+                          flipped={ this.props.hide }
                       />
                   )
               })
