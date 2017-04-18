@@ -7,10 +7,22 @@ class Hand extends Component {
             super(props);
             console.assert(Array.isArray(this.props.cards), 'Hands must have cards, even as an empty array');  
             //setup for fanning
-            if(this.props.fan) this.resetFanning();
+            if(this.props.fan){
+              this.resetFanning();
+              this.styleType = this.fanStyle;
+            } 
+            else if(this.props.spread){
+                this.resetSpread();
+                this.styleType = this.spreadStyle;
+            } 
 
 
         }
+    resetSpread(){
+        this.initialOver = 110 * (this.props.cards.length - 1);
+        this.over = this.initialOver / 2;
+
+    }
     resetFanning(){
         this.curl = Math.pow(this.props.cards.length, 1.30) * 10; //curl of cards in hand
         this.deg = this.props.cards.length > 1 ? -this.props.cards.length * 15 : 0;
@@ -23,9 +35,19 @@ class Hand extends Component {
     componentWillUpdate(){
         if (this.props.fan) {
           this.resetFanning();
+        }else if(this.props.spread){
+            this.resetSpread();
         }
     }
+    spreadStyle(num){
 
+        if(num > 0){
+            this.over -= this.initialOver / (this.props.cards.length - 1);
+        }
+        return {
+            'transform' : 'translateX(' + (-50 + this.over * -1) + '%)'
+        }
+    }
     fanStyle(num) {
         let overHalf = num > (this.props.cards.length - 1) / 2;
         if (process.env.NODE_ENV !== "production") {
@@ -57,7 +79,7 @@ class Hand extends Component {
                       key={ card }
                       height={ this.props.cardSize }
                       card={ card }
-                      style={ this.fanStyle(num)}
+                      style={this.styleType(num)}
                       flipped={ this.props.hide }
                       />
                   )

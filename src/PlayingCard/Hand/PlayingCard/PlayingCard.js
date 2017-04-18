@@ -9,7 +9,8 @@ class PlayingCard extends Component {
     this.state = {
       flipped : props.flipped,
       card : props.card,
-      height : props.height
+      height : props.height,
+      flippable : props.flippable
     }
 
   }
@@ -22,11 +23,11 @@ class PlayingCard extends Component {
           className='Playing-card' 
           src={this.state.flipped === true ? PlayingCardsList.flipped : PlayingCardsList[this.state.card]} 
           alt={this.state.flipped === true ? 'Hidden Card' : PlayingCardsList[this.state.card]}
-          onClick={()=> {
+          onClick={this.state.flippable ? ()=> {
             this.setState({flipped:this.state.flipped === true ? false : true,
               height: this.state.height,
               card: this.state.card});
-          }}
+          } : null}
         />
     );
   }
