@@ -18,7 +18,7 @@ class App extends Component {
     return (
 
 
-        <Table cardSize={window.innerHeight / 6} style={{'height':window.innerHeight+'px'}}/>
+        <Table cardSize={window.innerHeight / 5.5} style={{'height':window.innerHeight+'px'}}/>
 
     );
   }

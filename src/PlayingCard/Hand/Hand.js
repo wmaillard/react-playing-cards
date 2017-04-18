@@ -5,6 +5,7 @@ import PlayingCard from './PlayingCard/PlayingCard';
 class Hand extends Component {
     constructor(props) {
             super(props);
+            console.assert(Array.isArray(this.props.cards), 'Hands must have cards, even as an empty array');  
             //setup for fanning
             if(this.props.fan) this.resetFanning();
 
@@ -53,6 +54,7 @@ class Hand extends Component {
                   num++;
                   return (
                       <PlayingCard 
+                      key={ card }
                       height={ this.props.cardSize }
                       card={ card }
                       style={ this.fanStyle(num)}
