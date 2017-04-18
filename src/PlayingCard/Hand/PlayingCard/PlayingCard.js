@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './PlayingCard.css';
-import PlayingCards from './PlayingCards';
+import PlayingCardsList from './PlayingCardsList';
 
 
 class PlayingCard extends Component {
@@ -11,7 +11,7 @@ class PlayingCard extends Component {
       card : props.card,
       height : props.height
     }
-    console.log(props.onClick)
+
   }
   render() {
     return (
@@ -20,17 +20,14 @@ class PlayingCard extends Component {
           style={this.props.style}
           height={this.state.height} 
           className='Playing-card' 
-          src={this.state.flipped === 'true' ? PlayingCards.flipped : PlayingCards[this.state.card]} 
-          alt={this.state.flipped === 'true' ? 'Hidden Card' : PlayingCards[this.state.card]}
+          src={this.state.flipped === true ? PlayingCardsList.flipped : PlayingCardsList[this.state.card]} 
+          alt={this.state.flipped === true ? 'Hidden Card' : PlayingCardsList[this.state.card]}
           onClick={()=> {
-            this.setState({flipped:this.state.flipped === 'true' ? 'false' : 'true',
+            this.setState({flipped:this.state.flipped === true ? false : true,
               height: this.state.height,
               card: this.state.card});
           }}
         />
-
-
-      
     );
   }
 }

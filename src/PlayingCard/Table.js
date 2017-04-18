@@ -1,87 +1,45 @@
 import React, { Component } from 'react';
-import PlayingCard from './PlayingCard';
 import './Table/Table.css';
-import './Hand/Hand.css'
-
-class Hand extends Component {
-  //Add prop for fan
-  //add prop for overlap
-  render() {
-  	const curl = Math.pow(this.props.cards.length, 1.53) * 20; //curl of cards in hand
-    let num = 0;
-    let deg = this.props.cards.length > 1 ? -this.props.cards.length * 15 : 0;
-    let degs = deg / 2;
-    let initialDown = this.props.cards.length * 10;
-    let down = initialDown / 2;
-    let initialOver = curl;
-    let over = initialOver / 2;
-    return(
-      <div className='Hand' >
-      {
-          //0 to be -1, length to be 1 
-          this.props.cards.map((card)=>{
-            let overHalf = num > (this.props.cards.length - 1) / 2;
-            if(num > 0){
-              degs -= deg / (this.props.cards.length - 1);
-              down -= initialDown / (this.props.cards.length - 1);
-              over -= initialOver / (this.props.cards.length - 1);
-            } 
-            num++;
-            let actualDown = overHalf ? -down : down;
-            console.log('degs',degs);
-            console.log('over', over);
-            console.log('down', actualDown)
-           // degs = 0;
-            
-           // actualDown = 0;
-
-            //translate percent is not working but px is, maybe calc percent from cardSize?
-            return (
-            <div classNae='wrapper'>
-              <PlayingCard className='Player-card' height={this.props.cardSize} card={card} style={{'transform': 'translateY(' + actualDown + '%) translateX(' + over * -1 + '%) rotate(' + degs + 'deg)' +
-            ''}} />
-            </div>
-
-
-            )
-            
-          })
-      }
-      </div>
-      )
-  }
-}
-
-
-
+import Hand from './Hand/Hand'
 class Table extends Component {
-  render() {
-    this.state = {
-      cards1 : ['7d': '7d', '3s': '3s', '2h':'2h'],
-      cards2 : ['kd': 'kd', 'qs': 'qs', '1h':'1h', '7d': '7d', '3s': '3s', 'kd': 'kd', 'qs': 'qs', '1h':'1h', '7d': '7d', '3s': '3s', '2h':'2h'],
-      cards3 : ['kd': 'kd', 'qs': 'qs', '1h':'1h', '7d': '7d'],
-      cards4 : ['kd': 'kd'],
-      cards5 : ['kd' : 'kd', 'kd' : 'kd']
-
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            cards: ['kd': 'kd', 'qs': 'qs', '3h': '3h', '7d': '7d', '3c': '3c', 'qd': 'qd', '1h': '1h', '8d': '8d', '3s': '3s', '2h': '2h'],
+        }
+            
     }
-    //const inlineStyle = 
-    return (
-      <div>
-      {/*
-      <Hand cards={this.state.cards1} cardSize={50}/>
-      <Hand cards={this.state.cards2} cardSize={100}/>
-      */}
-      <Hand cards={this.state.cards3} cardSize={110}/>
-      {/*
-      <Hand cards={this.state.cards4} cardSize={250}/>
-      <Hand cards={this.state.cards5} cardSize={500}/>
-      */}
+    componentDidMount(){
+        setInterval(()=>this.removeOne(), 4000)
+    }
+    componentWillUnmount() {
+      clearInterval(this.interval);
+    }
 
-      </div>
-      
-    );
-  }
+    removeOne() {
+        this.state.cards.pop()
+        this.setState({cards : this.state.cards, fan:false});
+
+    }
+    render() {
+
+        this.props.cardSize ? this.cardSize = this.props.cardSize : this.cardSize = 110;
+        return (
+          <div className='Card-table' style={this.props.style}>
+            <div style={{'bottom': this.cardSize * 1.5 + 'px', 'right':'50%', 'position':'absolute'}}>
+                <Hand hide={false} fan={true} cards={this.state.cards} cardSize={this.cardSize} />
+            </div>
+            <div style={{'top': 'calc(50% - ' + this.cardSize + 'px)', 'left':this.cardSize * .5, 'position':'absolute'}}>
+                <Hand rotate={90} fan={true} hide={false} cards={this.state.cards} cardSize={this.cardSize}/>
+            </div>
+            <div style={{'right':'50%', 'top': -this.cardSize * .5, 'position':'absolute'}}>
+                <Hand rotate={180} fan={true} hide={false} cards={this.state.cards} cardSize={this.cardSize}/>
+            </div>
+            <div style={{'right':this.cardSize * .5 + 'px', 'top':'calc(50% - ' + this.cardSize + 'px)', 'position':'absolute'}}>
+                <Hand rotate={270} hide={false} fan={true} cards={this.state.cards} cardSize={this.cardSize}/>
+            </div>
+          </div>
+        );
+    }
 }
-
 export default Table;
