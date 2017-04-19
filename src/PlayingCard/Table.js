@@ -18,11 +18,16 @@ class Table extends Component {
     }
 
     removeOne(hand) {
-        this.state.board.push(this.state[hand].pop())
+        return;
+        /*this.state.board.push(this.state[hand].pop())
         this.setState({[hand] : this.state[hand], 
             board : this.state.board});
-
+*/
     }
+
+    //We need to do move card on click of a card
+        //1st raise card 75%
+
     render() {
 
         this.props.cardSize ? this.cardSize = this.props.cardSize : this.cardSize = 110;

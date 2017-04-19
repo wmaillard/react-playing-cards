@@ -4,7 +4,7 @@ let faces = ['j', 'q', 'k'];
 
 let addSuits = (i, PlayingCardsList) => {
 	for(let suit of suits){
-		PlayingCardsList[i + suit] = require('./CardImages/' + i + suit + '.svg');
+		PlayingCardsList[i + suit] = './CardImages/png/' + i + suit + '.png';
 	}
 }
 
@@ -15,7 +15,7 @@ for(let i = 1; i < 10; i++){
 for(let i of faces){
 	addSuits(i, PlayingCardsList);
 }
-PlayingCardsList.flipped = require('./CardImages/b.svg');
+PlayingCardsList.flipped = './CardImages/png/b.png';
 
 
 export default PlayingCardsList;
