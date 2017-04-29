@@ -1,19 +1,7 @@
-.Hand div {
-	display: inline-block;
-    height: 100%;
+.Hand .Playing-card{
+	position:absolute;
 }
 .Hand {
-	text-align: center
-}
-@media screen and (max-width: 699px) and (min-width: 520px) {
-	.Hand .Playing-card:hover{
-		transform:translateY(-70%)
-	}
+	position:absolute;
 }
 
-
-@media screen and (max-width: 1000px) and (min-width: 700px){
-	.Hand .Playing-card:hover{
-		transform:translateY(-50%)
-	}
-}

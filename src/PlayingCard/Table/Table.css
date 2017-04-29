@@ -7,3 +7,9 @@
 
 	text-align: center
 }
+
+.Card-table {
+	position:relative;
+	background: #076324;
+	 overflow: hidden;
+}
