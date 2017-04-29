@@ -8,7 +8,7 @@ class PlayingCard extends Component {
     super(props);
 
     this.state = {
-      flipped : props.flipped,
+      flipped : props.flipped || props.card === 'hide',
       card : props.card,
       height : props.height,
       flippable : props.flippable,

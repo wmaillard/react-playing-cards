@@ -1,0 +1,7 @@
+.Board {
+  display: flex;
+}
+.BoardHandWrapper {
+  flex: 1;
+  padding-left: 10%;
+}

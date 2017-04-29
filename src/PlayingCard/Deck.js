@@ -23,17 +23,31 @@ export default class Deck {
         }
         return deck;
     }
-    deal(n){
+    deal(n, hidden, notHidden){
         let dist = [];
         if(n > this.cards.length){
             console.log('not enough cards, dealing max');
             n = this.cards.length;
         }
+        console.log('n': n)
         while(n){
-            dist.push(this.cards.pop());
+            if(hidden){
+                hidden[n] ? dist.push('hide') : dist.push(this.cards.pop());
+            }else if(notHidden){
+                notHidden[n] ? dist.push(this.cards.pop()) : dist.push('hide');
+            }
+            else dist.push(this.cards.pop())
+
             n--;
         }
         return dist;
+    }
+    solitaire(){
+        var decks = [];
+        for(var i = 8; i > 0; i--){
+            decks.push(this.deal(i, false, {1 : true}));
+        }
+        return decks;
     }
     shuffle(){
         /**

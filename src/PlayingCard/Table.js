@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import './Table/Table.css';
 import Hand from './Hand/Hand'
 import Deck from './Deck';
+import Board from './Board';
+
 class Table extends Component {
     constructor(props) {
         super(props);
         this.deck = new Deck();
         this.deck.shuffle();
         this.state = {
-            handN : this.deck.deal(5),
-            handS : this.deck.deal(3),
-            handE : this.deck.deal(7),
-            handW : this.deck.deal(4),
-            board : []
+            handN : this.deck.deal(0),
+
+            handE : this.deck.deal(0),
+            handW : this.deck.deal(0),
+            board : this.deck.solitaire(),
+            handS : this.deck.deal(100),
         }
             
     }
@@ -21,8 +24,8 @@ class Table extends Component {
         return;
         /*this.state.board.push(this.state[hand].pop())
         this.setState({[hand] : this.state[hand], 
-            board : this.state.board});
-*/
+            board : this.state.board});*/
+
     }
 
     //We need to do move card on click of a card
@@ -33,8 +36,8 @@ class Table extends Component {
         this.props.cardSize ? this.cardSize = this.props.cardSize : this.cardSize = 110;
         return (
           <div className='Card-table' style={this.props.style}>
-            <div onClick={()=>this.removeOne('handS')} id='bottom'style={{'bottom': this.cardSize * 1.5 + 'px', 'right':'50%', 'position':'absolute'}}>
-                <Hand hide={false} fan={true} cards={this.state.handS} cardSize={this.cardSize} />
+            <div onClick={()=>this.removeOne('handS')} id='bottom' style={{'bottom' : '3%', 'right':'50%', 'position':'absolute'}}>
+                <Hand hide={false} fan={false} stack={true} cards={this.state.handS} cardSize={this.cardSize} />
             </div>
             <div onClick={()=>this.removeOne('handW')} id='left' style={{'top': 'calc(50% - ' + this.cardSize + 'px)', 'left':this.cardSize * .3 + 'px', 'position':'absolute'}}>
                 <Hand rotate={90} fan={true} hide={false} cards={this.state.handW} cardSize={this.cardSize}/>
@@ -45,10 +48,8 @@ class Table extends Component {
             <div onClick={()=>this.removeOne('handE')} id='right' style={{'right':this.cardSize * .1 + 'px', 'top':'calc(50% - ' + this.cardSize + 'px)', 'position':'absolute'}}>
                 <Hand rotate={270} hide={true} fan={false} spread={true} cards={this.state.handE} cardSize={this.cardSize}/>
             </div>
-            <div id='board' style={{'right':'50%', 'top':'calc(50% - ' + (this.cardSize / 2) + 'px)', 'position':'absolute'}}>
-                <Hand hide={false} fan={false} spread={true} cards={this.state.board} cardSize={this.cardSize}/>
+                <Board width={75} cardSize={this.cardSize} hands={this.state.board}/>        
             </div>
-          </div>
         );
     }
 }

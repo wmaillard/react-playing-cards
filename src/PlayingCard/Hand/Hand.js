@@ -11,7 +11,8 @@ class Hand extends Component {
             this.state = {
               cards : this.props.cards,
               cardSize : this.props.cardSize,
-              elevated : this.props.elevated
+              elevated : this.props.elevated,
+              styleType: props.stack ? 'stack' : 'fan',
             };
 
             //setup for fanning
@@ -22,10 +23,16 @@ class Hand extends Component {
             else if(this.props.spread){
                 this.resetSpread();
                 this.styleType = this.spreadStyle;
-            } 
+            }else if(this.props.stack){
+              this.resetStack();
+              this.styleType = this.stackStyle;
+            }
     }
     elevateOne(card){
 
+    }
+    resetStack(){
+        this.over = 50;
     }
     resetSpread(){
         this.initialOver = 110 * (this.state.cards.length - 1);
@@ -75,19 +82,27 @@ class Hand extends Component {
             translateX(${(-50 + this.over * -1)}%) 
             rotate(${this.degs}deg)` }
     }
+    stackStyle(num){
+        if(num > 0){
+            this.over -= 20 / this.state.cards.length
+        }
+        return {
+            'transform' : `translateX(${(this.over * -1)}%)`
+        }
+    }
     render() {
         let index = 0;
         console.log('rendering a hand')
         return (
         <div className={'Hand'}
-          style={{ 'height': this.state.cardSize * 2, 
+          style={{ 'height': this.state.styleType === 'stack' ? this.state.cardSize : this.state.cardSize * 2, 
           'transform':'rotate(' + this.props.rotate + 'deg)'}} > 
           {
               this.state.cards.map((card) => {
                   return (
                       <PlayingCard 
                           ref={(node)=>this.cardStyles.push(node ? ReactDOM.findDOMNode(node).getBoundingClientRect() : null)}
-                          key={ card }
+                          key={ this.id }
                           height={ this.state.cardSize }
                           card={ card }
                           style={this.styleType(index++)}

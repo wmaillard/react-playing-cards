@@ -9,6 +9,9 @@
 }
 
 .Card-table {
+	display:flex;
+	justify-content:center;
+	align-items:center;
 	position:relative;
 	background: #076324;
 	 overflow: hidden;
