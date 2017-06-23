@@ -4,6 +4,7 @@ import Hand from './Hand/Hand';
 
 
 
+
 class Board extends Component {
   constructor(props){
     super(props);
@@ -13,6 +14,7 @@ class Board extends Component {
         cardSize : props.cardSize,
         cardWidth:  225 / 314 * props.cardSize,
         width: this.props.width ? this.props.width : 100,
+        style: this.props.style ? this.props.style : {'width': this.state.width + '%'}
 
     }
     
@@ -23,7 +25,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div className="Board" style={{'width': this.state.width + '%'}}>
+      <div className="Board" style={this.state.style}>
       {
         this.state.hands.map((hand) => {
           return (
