@@ -8,25 +8,27 @@ class Hand extends Component {
             super(props);
             console.assert(Array.isArray(this.props.cards), 'Hands must have cards, even as an empty array');
             this.cardStyles = [];
+
             this.state = {
               cards : this.props.cards,
               cardSize : this.props.cardSize,
               elevated : this.props.elevated,
-              styleType: props.stack ? 'stack' : 'fan',
+              layout: props.layout,
             };
 
             //setup for fanning
-            if(this.props.fan){
-              this.resetFanning();
-              this.styleType = this.fanStyle;
-            } 
-            else if(this.props.spread){
-                this.resetSpread();
-                this.styleType = this.spreadStyle;
-            }else if(this.props.stack){
-              this.resetStack();
-              this.styleType = this.stackStyle;
-            }
+
+    }
+    componentWillReceiveProps(props) {
+        console.log('got some props: ', props)
+
+        this.setState({
+            cards : props.cards,
+            cardSize : props.cardSize,
+            elevated : props.elevated,
+            layout: props.layout
+        })
+
     }
     elevateOne(card){
 
@@ -48,14 +50,7 @@ class Hand extends Component {
         this.initialOver = this.curl;
         this.over = this.initialOver / 2;
     }
-    componentWillUpdate(){
-        console.log('re-rendering: ', this.state.cards)
-        if (this.props.fan) {
-          this.resetFanning();
-        }else if(this.props.spread){
-            this.resetSpread();
-        }
-    }
+
     spreadStyle(num){
 
         if(num > 0){
@@ -92,10 +87,27 @@ class Hand extends Component {
     }
     render() {
         let index = 0;
-        console.log('rendering a hand')
+        console.log('rendering a hand: ', this.styleType);
+        console.log('rendering a hand: ', this.state);
+
+        if(this.state.layout === 'fan'){
+            this.resetFanning();
+            this.styleType = this.fanStyle;
+        }
+        else if(this.state.layout === 'spread'){
+            this.resetSpread();
+            this.styleType = this.spreadStyle;
+        }else if(this.state.layout === 'stack'){
+            this.resetStack();
+            this.styleType = this.stackStyle;
+        }
+
+
+
+
         return (
         <div className={'Hand'}
-          style={{ 'height': this.state.styleType === 'stack' ? this.state.cardSize : this.state.cardSize * 2, 
+          style={{ 'height': this.state.layout === 'stack' ? this.state.cardSize : this.state.cardSize * 2,
           'transform':'rotate(' + this.props.rotate + 'deg)'}} > 
           {
               this.state.cards.map((card) => {

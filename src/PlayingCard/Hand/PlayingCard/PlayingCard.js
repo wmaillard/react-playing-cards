@@ -17,6 +17,16 @@ class PlayingCard extends Component {
     }
 
   }
+  componentWillReceiveProps(props) {
+    this.setState({
+        flipped : props.flipped,
+        card : props.card,
+        height : props.height,
+        flippable : props.flippable,
+        elevated : props.elevated,
+        style : props.style
+    })
+  }
   elevate(percent){
     if(this.state.elevated) percent = -percent;
     let style = this.state.style;
@@ -32,7 +42,9 @@ class PlayingCard extends Component {
   }
   render() {
     console.log('rendering card : ', this.state.card)
-    return (
+      console.log('props card : ', this.props.card)
+
+      return (
 
         <img
           style={this.state.style}
