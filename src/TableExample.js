@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import {createStore } from 'redux';
 
-import './App.css';
+import './TableExample.css';
 import Table from './PlayingCard/Table'
 
 /*
@@ -69,7 +69,7 @@ Takeaway:
 
 
 
-class App extends Component {
+class TableExample extends Component {
   constructor(){
     super();
     this.state = {
@@ -89,4 +89,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TableExample;
