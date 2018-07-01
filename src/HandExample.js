@@ -64,7 +64,7 @@ handSize: "4"}
               value={this.state.layout}
               placeholder="Select an option"
           />
-            Number of Cards: 
+            Number of Cards:
             <Dropdown
                 options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
                 onChange={this._onSelectHandSize}
