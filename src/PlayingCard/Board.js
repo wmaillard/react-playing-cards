@@ -17,10 +17,10 @@ class Board extends Component {
         style: this.props.style ? this.props.style : {'width': this.state.width + '%'}
 
     }
-    
-
-
   }
+    onClick(key){
+        this.props.onClick(key);
+    }
 
 
   render() {
@@ -30,7 +30,7 @@ class Board extends Component {
         this.state.hands.map((hand) => {
           return (
             <div className="BoardHandWrapper">
-                <Hand hide={false} stack={true} cards={hand} cardSize={this.state.cardSize}/>
+                <Hand handId={hand.handId} onClick={this.onClick.bind(this)} hide={hand.hide} layout={"stack"} cards={hand.hand} cardSize={this.state.cardSize}/>
             </div>
           )
       })

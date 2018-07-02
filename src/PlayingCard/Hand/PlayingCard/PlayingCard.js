@@ -28,6 +28,7 @@ class PlayingCard extends Component {
     })
   }
   elevate(percent){
+      console.log(this.state);
     if(this.state.elevated) percent = -percent;
     let style = this.state.style;
     let translateY = style.transform.match(/translateY\((.*?)\)/); //pull out translateY
@@ -40,9 +41,10 @@ class PlayingCard extends Component {
     this.setState({style : style,
                     elevated : !this.state.elevated})
   }
+    onClick(){
+        this.props.onClick(this.props.card);
+    }
   render() {
-    console.log('rendering card : ', this.state.card)
-      console.log('props card : ', this.props.card)
 
       return (
 
@@ -52,7 +54,8 @@ class PlayingCard extends Component {
           className='Playing-card' 
           src={this.state.flipped === true ? PlayingCardsList.flipped : PlayingCardsList[this.state.card]} 
           alt={this.state.flipped === true ? 'Hidden Card' : PlayingCardsList[this.state.card]}
-          onClick={this.props.elevateOnClick ? () => this.elevate(this.props.elevateOnClick) : null}
+          // onClick={this.props.elevateOnClick ? () => this.elevate(this.props.elevateOnClick) : null}
+          onClick={this.onClick.bind(this)}
         />
     );
   }

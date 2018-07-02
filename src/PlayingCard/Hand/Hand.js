@@ -13,7 +13,7 @@ class Hand extends Component {
               cards : this.props.cards,
               cardSize : this.props.cardSize,
               elevated : this.props.elevated,
-              layout: props.layout,
+              layout: this.props.layout,
             };
 
             //setup for fanning
@@ -85,10 +85,11 @@ class Hand extends Component {
             'transform' : `translateX(${(this.over * -1)}%)`
         }
     }
+    onClick(key){
+        this.props.onClick({card: key, hand : this.props.handId});
+    }
     render() {
         let index = 0;
-        console.log('rendering a hand: ', this.styleType);
-        console.log('rendering a hand: ', this.state);
 
         if(this.state.layout === 'fan'){
             this.resetFanning();
@@ -120,7 +121,7 @@ class Hand extends Component {
                           style={this.styleType(index++)}
                           flipped={ this.props.hide }
                           elevateOnClick={50}
-                      />
+                          onClick={this.onClick.bind(this)}                      />
                   )
               })
           }

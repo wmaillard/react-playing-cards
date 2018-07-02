@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PlayingCardsList from "./PlayingCard/Hand/PlayingCard/PlayingCardsList";
 import Dropdown from 'react-dropdown'
-import './TableExample.css';
 import Hand from "./PlayingCard/Hand/Hand";
 
 

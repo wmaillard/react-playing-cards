@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 //import {createStore } from 'redux';
 
-import './TableExample.css';
-import Table from './PlayingCard/Table'
+import './SolitaireExample.css';
+import GinRummy from "./PlayingCard/GinRummy";
+import Board from "./PlayingCard/Board";
+import Hand from "./PlayingCard/Hand/Hand";
 
 /*
 This video series is awesome:
@@ -69,9 +71,9 @@ Takeaway:
 
 
 
-class TableExample extends Component {
-  constructor(){
-    super();
+class GinRummyExample extends Component {
+  constructor(props){
+    super(props);
     this.state = {
       flipped : 'false'
     }
@@ -81,12 +83,10 @@ class TableExample extends Component {
   render() {
 
 
-    return (
-      //we want a store with hands, a board (with hands);
-        <Table cardSize={Math.min(window.innerHeight / 5.5, window.innerWidth / 5.5)} style={{'height':window.innerHeight+'px'}}/>
-
-    );
+      return (
+        <GinRummy cardSize={Math.min(window.innerHeight / 5.5, window.innerWidth / 5.5)} style={{'height':window.innerHeight+'px'}}/>
+      )
   }
 }
 
-export default TableExample;
+export default GinRummyExample;

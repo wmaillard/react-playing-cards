@@ -29,7 +29,7 @@ export default class Deck {
             console.log('not enough cards, dealing max');
             n = this.cards.length;
         }
-        console.log('n': n)
+        console.log('n:', n)
         while(n){
             if(hidden){
                 hidden[n] ? dist.push('hide') : dist.push(this.cards.pop());

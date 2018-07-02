@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './Table/Table.css';
 import Hand from './Hand/Hand'
 import Deck from './Deck';
-import Board from './Board';
 import Boards from './Boards';
 
-class Table extends Component {
+class Solitaire extends Component {
     constructor(props) {
         super(props);
         this.deck = new Deck();
@@ -42,4 +41,4 @@ class Table extends Component {
 
 
 
-export default Table;
+export default Solitaire;

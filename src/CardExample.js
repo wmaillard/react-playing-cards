@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 //import {createStore } from 'redux';
 import PlayingCardsList from "./PlayingCard/Hand/PlayingCard/PlayingCardsList";
 import Dropdown from 'react-dropdown'
-import './TableExample.css';
-import Table from './PlayingCard/Table'
 import PlayingCard from "./PlayingCard/Hand/PlayingCard/PlayingCard";
 
 
