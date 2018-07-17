@@ -21,10 +21,24 @@ class Board extends Component {
     onClick(key){
         this.props.onClick(key);
     }
+    componentWillReceiveProps(props) {
+        console.log('got board some props: ', props)
+
+        this.setState({
+            hands : props.hands,
+            cardSize : props.cardSize,
+            cardWidth:  225 / 314 * props.cardSize,
+            width: props.width ? props.width : 100,
+            style: props.style ? props.style : {'width': this.state.width + '%'}
+        })
+
+    }
 
 
   render() {
-    return (
+      console.log("hands: ", this.props.hands)
+
+      return (
       <div className="Board" style={this.state.style}>
       {
         this.state.hands.map((hand) => {

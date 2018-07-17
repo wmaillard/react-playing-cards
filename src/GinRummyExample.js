@@ -84,7 +84,7 @@ class GinRummyExample extends Component {
 
 
       return (
-        <GinRummy cardSize={Math.min(window.innerHeight / 5.5, window.innerWidth / 5.5)} style={{'height':window.innerHeight+'px'}}/>
+        <GinRummy cardSize={Math.min(window.innerHeight / 5.5, window.innerWidth / 5.5, 80)} style={{'height':window.innerHeight+'px'}}/>
       )
   }
 }
