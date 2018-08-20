@@ -7,25 +7,32 @@ import io from 'socket.io-client';
 const { Map, List } = require('immutable')
 
 
-class GinRummy extends Component {
+class Poker extends Component {
     constructor(props) {
         super(props);
         this.deck = new Deck();
+        this.deck.shuffle();
         this.socket = io(process.env.REACT_APP_SOCKET_SERVER);//openSocket('http://localhost:8000');
         this.cardSize = props.cardSize;
         this.state = {
-            handN : [], //this.deck.deal(10),
-            handS : [], //this.deck.deal(10),
+            handN : this.deck.deal(2), //this.deck.deal(10),
+            handNE : this.deck.deal(2),
+            handE : this.deck.deal(2),
+            handSE : this.deck.deal(2),
+            handS : this.deck.deal(2), //this.deck.deal(10),
+            handSW : this.deck.deal(2),
+            handW : this.deck.deal(2),
+            handNW : this.deck.deal(2),
             discard : Map({
                 handId : "discard",
                 hide : false,
-                hand: [], //this.deck.deal(1)
-                layout : "stack"
+                hand: this.deck.deal(5),//this.deck.deal(1)
+                layout : "spread"
             }),
             draw : Map({
                 handId : "draw",
                 hide : true,
-                hand : [], //this.deck.deal(999)
+                hand : this.deck.deal(999), //this.deck.deal(999)
                 layout : "stack"
             })
         };
@@ -43,7 +50,13 @@ class GinRummy extends Component {
             // console.log('got state: ', newState);
 
             const newStateFull = {
-                handN : newState.players.opponentState1 && newState.players.opponentState1.primaryHand || [], //change this to an array of opponents
+                handN : newState.players.opponentState0 && newState.players.opponentState0.primaryHand || [], //change this to an array of opponents
+                handNW : newState.players.opponentState1 && newState.players.opponentState1.primaryHand || [], //change this to an array of opponents
+                handNE : newState.players.opponentState2 && newState.players.opponentState2.primaryHand || [],
+                handE : newState.players.opponentState3 && newState.players.opponentState3.primaryHand || [],
+                handSE : newState.players.opponentState4 && newState.players.opponentState4.primaryHand || [],
+                handSW : newState.players.opponentState5 && newState.players.opponentState5.primaryHand || [],
+                handW : newState.players.opponentState6 && newState.players.opponentState6.primaryHand || [],
                 handS : newState.players.playerState.primaryHand || [],
                 discard : this.state.discard.set("hand", newState.discard),
                 draw : this.state.draw.set("hand", newState.draw)
@@ -56,10 +69,11 @@ class GinRummy extends Component {
         // this.deck.shuffle();
 
         this.styles = {
-            twoHand: function () {
+            eightHand: function () {
                 return {
                     handN: {'transform' : 'translateY(-30%) rotate(180deg)', 'right': '50%', 'top': "0", 'position': 'absolute'},
                     handS: {'bottom': '0', 'right': '50%', 'position': 'absolute', 'height' : '30%'},
+                    handNE : {'bottom': '0', 'right': '50%', 'position': 'absolute', 'transform': 'rotate(45deg) translate(' + props.cardSize +'px -' + window.innerHeight() + ')', 'transform-origin' : ' 0px -' + window.innerWidth / 2 + 'px'},
                     board: {'left': 'calc(50% - ' + props.cardSize * 1.4 + 'px)', 'top': '35%', 'position': 'absolute', 'width': props.cardSize * 4 + 'px'}
                 }
             }
@@ -123,16 +137,23 @@ class GinRummy extends Component {
         console.log("draw: ", this.state.draw.toJS())
         return (
             <div className='Card-table' style={this.props.style}>
-                <div id='top' style={this.styles.twoHand(this.cardSize).handN}>
+                <div id='top' style={this.styles.eightHand(this.cardSize).handN}>
                     <Hand onClick={this.onClick.bind(this)} handId={'handN'} layout={"fan"} hide={true}
                           cards={this.state.handN} cardSize={this.cardSize}/>
                 </div>
-                <Board onClick={this.onClick.bind(this)} width={75} cardSize={this.cardSize * 1.7}
-                       style={this.styles.twoHand(this.cardSize).board} hands={[this.state.draw.toJS(), this.state.discard.toJS()]}/>
-                <div id='bottom' style={this.styles.twoHand(this.cardSize).handS}>
+                <Board onClick={this.onClick.bind(this)} width={75} cardSize={this.cardSize}
+                       style={this.styles.eightHand(this.cardSize).board} hands={[this.state.draw.toJS(), this.state.discard.toJS()]}/>
+                <div id='bottom' style={this.styles.eightHand(this.cardSize).handS}>
                     <Hand                           key={ this.id }
                                                     onClick={this.onClick.bind(this)} handId={'handS'} hide={false} layout={"fan"}
                                                     cards={this.state.handS} cardSize={this.cardSize * 1.7}/>
+
+                </div>
+                <div id='idk' style={this.styles.eightHand(this.cardSize).handNE}>
+                    <Hand                           key={ this.id }
+                                                    onClick={this.onClick.bind(this)} handId={'handNE'} hide={false} layout={"fan"}
+                                                    cards={this.state.handNE} cardSize={this.cardSize}/>
+
                 </div>
             </div>
         )
@@ -142,4 +163,4 @@ class GinRummy extends Component {
 
 
 
-export default GinRummy;
+export default Poker;

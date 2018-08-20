@@ -5,6 +5,7 @@ import CardExample from "./CardExample";
 import HandExample from "./HandExample";
 import SolitaireExample from "./SolitaireExample";
 import GinRummyExample from "./GinRummyExample";
+import PokerExample from "./PokerExample";
 
 const Home = () => (
     <Router>
@@ -22,6 +23,9 @@ const Home = () => (
                 <li>
                     <Link to="/gin-rummy">Gin Rummy</Link>
                 </li>
+                <li>
+                    <Link to="/poker">Poker</Link>
+                </li>
             </ul>
 
             <hr />
@@ -30,6 +34,8 @@ const Home = () => (
             <Route path="/hand" component={HandExample} />
             <Route path="/solitaire" component={SolitaireExample} />
             <Route path="/gin-rummy" component={GinRummyExample} />
+            <Route path="/poker" component={PokerExample} />
+
 
 
         </div>

@@ -10,7 +10,7 @@ class HandExample extends Component {
     super();
 this.state = {hand: ["1d", "1c", "1s", "1h"],
 layout: "stack",
-handSize: "4"}
+handSize: "4" }
 
   }
     randomHand = (size) => {
@@ -44,6 +44,13 @@ handSize: "4"}
 
         });
     };
+    _getCardSize() {
+        console.log("window: ", window.innerWidth);
+        console.log('handsize', this.state.hand.length)
+        console.log("size: ", window.innerWidth / this.state.hand.length)
+        let cardSize = window.innerWidth / this.state.hand.length;
+        return this.state.layout !== "spread" || cardSize > 100 ? 100 : cardSize;
+    }
 
   render() {
     const handStyle = {
@@ -54,7 +61,7 @@ handSize: "4"}
     return (
         <div>
         <div style={handStyle}>
-            <Hand hide={false} layout={this.state.layout} cards={this.state.hand} cardSize={100}/>
+            <Hand hide={false} layout={this.state.layout} cards={this.state.hand} cardSize={this._getCardSize()}/>
         </div>
           Select a Layout:
           <Dropdown

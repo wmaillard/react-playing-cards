@@ -95,12 +95,12 @@ import Board from './Board';
             this.cardWidth = cardWidth;
             return (
                 <div className='Card-table' style={this.props.style}>
-                    <div onClick={() => this.removeOne('handS')} id='bottom'
-                         style={styles.oneHand(this.cardSize).handS}>
+                    <div id='bottom' style={styles.oneHand(this.cardSize).handS}>
+                        <Hand hide={false} layout={"stack"} cards={this.state.handS} cardSize={this.cardSize}/>
+                        <Hand hide={false} layout={"stack"} cards={this.state.handS} cardSize={this.cardSize}/>
+                        <Hand hide={false} layout={"stack"} cards={this.state.handS} cardSize={this.cardSize}/>
                         <Hand hide={false} layout={"stack"} cards={this.state.handS} cardSize={this.cardSize}/>
                     </div>
-                    <Board width={75} cardSize={this.cardSize} style={styles.oneHand(this.cardSize).board}
-                           hands={this.state.board}/>
                 </div>
             )
         }

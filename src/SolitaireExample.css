@@ -1,38 +1,37 @@
-.App {
-  text-align: center;
-  overflow: hidden;
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.1fr;
+  grid-template-rows: 0.1fr 1.3fr 2.4fr 0.2fr;
+  grid-gap: 1px 1px;
+  grid-template-areas: ". . . . . . . . ." ". deck_0 deck_1 deck_2 deck_3 deck_4 deck_5 deck_6 ." ". . . . hand_overall . . . ." ". . . . . . . . .";
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.deck_0 { grid-area: deck_0; }
+
+.deck_1 { grid-area: deck_1; }
+
+.deck_2 { grid-area: deck_2; }
+
+.deck_3 { grid-area: deck_3; }
+
+.deck_4 { grid-area: deck_4; }
+
+.deck_5 { grid-area: deck_5; }
+
+.deck_6 { grid-area: deck_6; }
+
+.hand_overall {
+  display: grid;
+  grid-area: hand_overall;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1px 1px;
+  grid-template-areas: "hand_top" "hand_bottom";
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+.hand_bottom { grid-area: hand_bottom; }
 
-.App-intro {
-  font-size: large;
-}
+.hand_top { grid-area: hand_top; }
 
-.Small-cards{
-  animation: App-logo-spin infinite 1s linear;
-}
-.Big-cards{
-  animation: Card-Flip 2s 1 linear;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes Card-Flip{
-  0% { transform: rotateX(0deg); }
-  100% {transform: rotateX(90deg); }
-}
 

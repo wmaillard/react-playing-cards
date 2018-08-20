@@ -44,7 +44,7 @@ class Board extends Component {
         this.state.hands.map((hand) => {
           return (
             <div className="BoardHandWrapper">
-                <Hand handId={hand.handId} onClick={this.onClick.bind(this)} hide={hand.hide} layout={"stack"} cards={hand.hand} cardSize={this.state.cardSize}/>
+                <Hand handId={hand.handId} onClick={this.onClick.bind(this)} hide={hand.hide} layout={hand.layout} cards={hand.hand} cardSize={this.state.cardSize}/>
             </div>
           )
       })
