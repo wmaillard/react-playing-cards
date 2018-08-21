@@ -129,7 +129,11 @@ class Hand extends Component {
         console.log('reviving: ', key);
 
         // this.refs[key].state.draggableDivStyle = {"transitionDuration": "0.25s"}
-
+        let cardToSpliceInto = this.state.cards[this.indexToInsertInto(key) + 1];
+        this.refs[key].state.position = {x : this.refs[key].getBindingClientRect().x, y : this.refs[key].getBindingClientRect().y}
+        console.log('card to splice into: ', cardToSpliceInto);
+        this.state.cards.splice(this.state.cards.indexOf(key), 1);
+        this.state.cards.splice(this.indexToInsertInto(key), 0, key);
 
         if(this.deadCards[key]) {
             this.deadCards[key].dead = false;
@@ -139,14 +143,20 @@ class Hand extends Component {
 
     }
     onDrag(key) {
-        console.log("draggin: ");
-        let cardToSpliceInto = this.state.cards[this.indexToInsertInto(key) + 1];
-        this.refs[key].state.position = {x : this.refs[key].getBindingClientRect().x, y : this.refs[key].getBindingClientRect().y}
-        console.log('card to splice into: ', cardToSpliceInto);
+        // console.log("draggin: ");
+        // // add a dup card into the hand?
+        // let newIndexToSpliceInto = this.state.cards[this.indexToInsertInto(key) + 1]
+        // if(this.previousIndexToSpliceInto !== newIndexToSpliceInto) {
+        //     this.previousIndexToSpliceInto = newIndexToSpliceInto
+        //     this.state.cards.splice(this.previousIndexToSpliceInto, 1);
+        //     this.state.cards.splice(this.previousIndexToSpliceInto, 0, key);
+        //     this.setState(this.state);
+        // }
+
+
+    }
+    onDragStart(key) {
         this.removeCard(key, this.refs[key].state.style);
-        this.state.cards.splice(this.state.cards.indexOf(key), 1);
-        this.state.cards.splice(this.indexToInsertInto(key), 0, key);
-        this.setState(this.state);
     }
     indexToInsertInto(key) {
         let indexToInsertInto = 0;
@@ -220,6 +230,7 @@ console.log('state: ', this.state);
                   console.log('refs', this.refs);
                   return (
                       <PlayingCard
+                          onDragStart={this.onDragStart.bind(this)}
                           onDragStop={this.onDragStop.bind(this)}
                           onDrag={this.onDrag.bind(this)}
                           removeCard={this.removeCard.bind(this)}

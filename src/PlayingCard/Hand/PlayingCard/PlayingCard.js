@@ -55,6 +55,7 @@ class PlayingCard extends Component {
         this.state.draggableDivStyle = {"zIndex":"999", "position" : "fixed"}
 
         e.preventDefault(); //fixes desktop drag image issue
+
         console.log('style: ', this.state.style);
         if(this.state.style && this.state.style.transform) {
             if(this.state.style.transform.indexOf('rotate') !== -1) {
@@ -67,6 +68,7 @@ class PlayingCard extends Component {
             // let newStyle = {transform :  this.state.style.transform.replace(/rotate(.*)/, 'rotate(0)')};
             this.props.removeCard(this.state.card, this.state.style);
         }
+        this.props.onDragStart(this.state.card);
         console.log('start');
     }
     onDrag() {
