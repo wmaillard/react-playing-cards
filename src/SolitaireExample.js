@@ -83,8 +83,9 @@ class SolitaireExample extends Component {
 
     return (
       //we want a store with hands, a board (with hands);
-        <Solitaire cardSize={Math.min(window.innerHeight / 5.5, window.innerWidth / 5.5)} style={{'height':window.innerHeight+'px'}}/>
-
+        <div style={{'paddingLeft': '10%'}}>
+          <Solitaire cardSize={Math.min(window.innerHeight / 7, window.innerWidth / 7.5)} style={{'height':window.innerHeight+'px'}}/>
+        </div>
     );
   }
 }

@@ -32,7 +32,9 @@ export default class Deck {
         console.log('n:', n)
         while(n){
             if(hidden){
-                hidden[n] ? dist.push('hide') : dist.push(this.cards.pop());
+                dist.push("hide");
+                this.cards.pop()
+                // hidden[n] ? dist.push('hide') : dist.push(this.cards.pop());
             }else if(notHidden){
                 notHidden[n] ? dist.push(this.cards.pop()) : dist.push('hide');
             }

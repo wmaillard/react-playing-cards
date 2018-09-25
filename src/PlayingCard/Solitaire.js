@@ -14,22 +14,27 @@ class Solitaire extends Component {
             //handE : this.deck.deal(7),
             //handW : this.deck.deal(6),
             // board : this.deck.solitaire(),
-            deck_0 : this.deck.deal(5),
-            deck_1 : this.deck.deal(5),
-            deck_2 : this.deck.deal(5),
-
-            deck_3 : this.deck.deal(5),
-
-            deck_4 : this.deck.deal(5),
-            deck_5 : this.deck.deal(5),
-            deck_6 : this.deck.deal(5),
-            deck_7 : this.deck.deal(5),
-            deck_8 : this.deck.deal(5),
-
-
+            deck_0 : this.deck.deal(6, true),
+            deck_1 : this.deck.deal(5, true),
+            deck_2 : this.deck.deal(4, true),
+            deck_3 : this.deck.deal(3, true),
+            deck_4 : this.deck.deal(2, true),
+            deck_5 : this.deck.deal(1, true),
+            deck_6 : [],
+            discard : this.deck.deal(3)
         }
+        this.state.deck_0 = this.state.deck_0.concat(this.deck.deal(1));
+        this.state.deck_1 = this.state.deck_1.concat(this.deck.deal(1));
+        this.state.deck_2 = this.state.deck_2.concat(this.deck.deal(1));
+        this.state.deck_3 = this.state.deck_3.concat(this.deck.deal(1));
+        this.state.deck_4 = this.state.deck_4.concat(this.deck.deal(1));
+        this.state.deck_5 = this.state.deck_5.concat(this.deck.deal(1));
+        this.state.deck_6 = this.state.deck_6.concat(this.deck.deal(1));
+        this.state.draw = this.deck.deal(100, true);
 
-            
+
+
+
     }
 
     removeOne(hand) {
@@ -68,13 +73,11 @@ class Solitaire extends Component {
             <div className={"deck_6"}>
                 <Hand hide={false} layout={"stack"} cards={this.state.deck_6} cardSize={this.cardSize}/>
             </div>
-            <div className={"hand_overall"}>
-                <div className={"area-overlap hand_bottom"}>
-                    <Hand hide={false} layout={"stack"} cards={this.state.deck_7} cardSize={this.cardSize}/>
-                </div>
-                <div className={"area-overlap hand_top"}>
-                    <Hand hide={false} layout={"stack"} cards={this.state.deck_8} cardSize={this.cardSize}/>
-                </div>
+            <div className={"hand_draw"}>
+                    <Hand hide={false} layout={"stack"} cards={this.state.draw} cardSize={this.cardSize}/>
+            </div>
+            <div className={"hand_discard"}>
+                <Hand hide={false} layout={"stack"} cards={this.state.discard} cardSize={this.cardSize}/>
             </div>
         </div>
         )

@@ -55,30 +55,38 @@ handSize: "4" }
   render() {
     const handStyle = {
         margin: "auto",
-      width: "10%",
-        paddingBottom: "10"
-};
-    return (
-        <div>
-        <div style={handStyle}>
-            <Hand hide={false} layout={this.state.layout} cards={this.state.hand} cardSize={this._getCardSize()}/>
-        </div>
-          Select a Layout:
-          <Dropdown
-              options={["fan", "stack", "spread"]}
-              onChange={this._onSelectLayout}
-              value={this.state.layout}
-              placeholder="Select an option"
-          />
-            Number of Cards:
-            <Dropdown
-                options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                onChange={this._onSelectHandSize}
-                value={this.state.handSize}
-                placeholder="Select an option"
-            />
-        </div>
-    );
+        width: "10%",
+        paddingBottom: "5%",
+        paddingTop: "5%",
+        left: "45%",
+        top: "50%"
+    };
+      return (
+          <div>
+              <div style={{"width": "30%", "paddingLeft":"32%"}}>
+                  Select a Layout:
+                  <Dropdown
+                      options={["fan", "stack", "spread"]}
+                      onChange={this._onSelectLayout}
+                      value={this.state.layout}
+                      placeholder="Select an option"
+                  />
+              </div>
+              <div style={{"width": "30%", "paddingLeft":"32%", "paddingTop":"2%"}}>
+                  Number of Cards:
+                  <Dropdown
+                      style={{"left": "45%"}}
+                      options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                      onChange={this._onSelectHandSize}
+                      value={this.state.handSize}
+                      placeholder="Select an option"
+                  />
+              </div>
+              <div style={handStyle}>
+                  <Hand hide={false} layout={this.state.layout} cards={this.state.hand} cardSize={this._getCardSize()}/>
+              </div>
+          </div>
+      );
   }
 }
 

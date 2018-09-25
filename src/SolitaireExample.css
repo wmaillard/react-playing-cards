@@ -4,7 +4,10 @@
   grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.1fr;
   grid-template-rows: 0.1fr 1.3fr 2.4fr 0.2fr;
   grid-gap: 1px 1px;
-  grid-template-areas: ". . . . . . . . ." ". deck_0 deck_1 deck_2 deck_3 deck_4 deck_5 deck_6 ." ". . . . hand_overall . . . ." ". . . . . . . . .";
+  grid-template-areas: ". . . . . . . . ."
+  ". deck_0 deck_1 deck_2 deck_3 deck_4 deck_5 deck_6 ."
+  ". . . . . . . . ."
+  ". . . hand_draw hand_discard . . . .";
 }
 
 .deck_0 { grid-area: deck_0; }
@@ -30,8 +33,8 @@
   grid-template-areas: "hand_top" "hand_bottom";
 }
 
-.hand_bottom { grid-area: hand_bottom; }
+.hand_discard { grid-area: hand_discard; }
 
-.hand_top { grid-area: hand_top; }
+.hand_draw { grid-area: hand_draw; }
 
 

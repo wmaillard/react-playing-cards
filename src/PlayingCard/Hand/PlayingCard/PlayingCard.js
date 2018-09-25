@@ -17,7 +17,7 @@ class PlayingCard extends Component {
       elevated : props.elevated,
       style : this.props.style,
         position : {x : 0, y : 0},
-        draggableDivStyle : {"zIndex":this.props.zIndex, "position" : "fixed"}
+        draggableDivStyle : {"zIndex":this.props.zIndex}
     }
 
   }
